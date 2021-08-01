@@ -7,5 +7,5 @@ package com.study.asyntask.core;
  */
 public interface AsynPorcess<T> {
 
-    <T> T process();
+    T process();
 }

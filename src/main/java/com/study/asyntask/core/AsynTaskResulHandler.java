@@ -2,7 +2,10 @@ package com.study.asyntask.core;
 
 import com.study.asyntask.vo.AsynTask;
 
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * @author jinzhiwen
@@ -22,6 +25,23 @@ public class AsynTaskResulHandler<T> {
         this.asynTask = processor.getAsynTask();
     }
 
+    public boolean isFinish(){
+        T t = null;
+        try {
+            t = future.get(2, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
+        if(t==null){
+            return false;
+        }else{
+            return true;
+        }
+    }
 
     public Future<T> getFuture() {
         return future;

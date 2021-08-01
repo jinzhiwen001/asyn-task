@@ -18,18 +18,6 @@ public class UseTest {
     @Autowired
     private AsynTaskClient client;
 
-    public void asynDo(){
-        AsynTask task = new AsynTask();
-        task.setTaskName("测试任务");
-        task.setSerial(UUID.randomUUID().toString());
 
-        client.submit(task, new AsynPorcess<String>() {
-            @Override
-            public <T> T process() {
-                //do something
-                return null;
-            }
-        });
-    }
 
 }

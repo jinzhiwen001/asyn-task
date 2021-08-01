@@ -58,7 +58,6 @@ public class TaskContainer {
             map.remove(handler.getAsynTask().getSerial());
         }
 
-
     }
 
     public TaskContainer(RedisTemplate redisTemplate){
@@ -69,7 +68,7 @@ public class TaskContainer {
 
         map.putIfAbsent(handler.getAsynTask().getSerial(),handler);
         TaskMonitor monitor = new TaskMonitor();
-        BeanUtils.copyProperties(handler,monitor);
+        BeanUtils.copyProperties(handler.getAsynTask(),monitor);
         monitor.setStop(false);
 
         redisTemplate.opsForValue().set(String.format(taskKey,handler.getAsynTask().getSerial()), JSON.toJSONString(monitor),2,TimeUnit.HOURS);
